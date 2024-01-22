@@ -14,20 +14,21 @@ def main() -> None:
         center=[1.0, 0.0, 2.0],
         target=[0.0, 0.0, 0.0],
         focalLength=0.5,
-        width=1.0,
-        height=1.0
+        fieldOfView=60,
+        widthPX=100,
+        heightPX=100
     )
+    camera = createCamera(cameraParams)
 
     ax3D, ax2D = createAxes(
         worldParams.width,
         worldParams.height,
         worldParams.depth,
-        cameraParams.width,
-        cameraParams.height
+        camera.getWidth(),
+        camera.getHeight()
     )
     polygons, colors = createBox()
     plotShape3D(ax3D, polygons, colors)
-    camera = createCamera(cameraParams)
     plotCamera(ax3D, camera)
     render(ax2D, camera, polygons, colors)
     # rednerRayTracing(ax2D, camera, polygons, colors)

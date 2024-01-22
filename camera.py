@@ -13,15 +13,35 @@ class Camera:
     _R: RotationMatrix3D = [[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]
     _iR: RotationMatrix3D = [[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]
     _f: float = .1
+    _fov: float = 60.
+    _width_px: int
+    _height_px: int
     _width: float = 1.
     _height: float = 1.
 
-    def __init__(self, center: Point3D, target: Point3D, focalLength: float, width: float, height: float) -> None:
+    def __init__(
+            self,
+            center: Point3D,
+            target: Point3D,
+            focalLength: float,
+            fieldOfView: float,
+            widthPX: int,
+            heightPX: int
+        ) -> None:
         self.move(center)
         self.look(target)
         self._f = focalLength
-        self._width = width
-        self._height = height
+        self._fov = fieldOfView
+        self._width_px = widthPX
+        self._height_px = heightPX
+        self.initWidth()
+        self.initHeight()
+
+    def initWidth(self) -> None:
+        self._width = 2 * self._f * np.tan(np.radians(self._fov) / 2)
+
+    def initHeight(self) -> None:
+        self._height = self._width * (self._height_px / self._width_px)
 
     def getFocalLength(self) -> float:
         return self._f
@@ -99,8 +119,9 @@ def createCamera(cameraParams: CameraParams) -> Camera:
         center=cameraParams.center,
         target=cameraParams.target,
         focalLength=cameraParams.focalLength,
-        width=cameraParams.width,
-        height=cameraParams.height
+        fieldOfView=cameraParams.fieldOfView,
+        widthPX=cameraParams.widthPX,
+        heightPX=cameraParams.heightPX
     )
     return camera
 

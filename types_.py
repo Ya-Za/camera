@@ -19,5 +19,6 @@ class CameraParams:
     center: Point3D
     target: Point3D
     focalLength: float
-    width: float
-    height: float
+    fieldOfView: float
+    widthPX: int
+    heightPX: int
