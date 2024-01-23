@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 from shapes_3d import createAxes, createBox, plotShape3D
-from camera import createCamera, plotCamera, render
+from camera import createCamera, plotCamera, render, renderRayTracing
 from types_ import WorldParams, CameraParams
 
 
@@ -30,8 +30,9 @@ def main() -> None:
     polygons, colors = createBox()
     plotShape3D(ax3D, polygons, colors)
     plotCamera(ax3D, camera)
-    render(ax2D, camera, polygons, colors)
-    # rednerRayTracing(ax2D, camera, polygons, colors)
+    # TODO: show both `render` and `raytracing`, we need two ax2D!
+    # render(ax2D, camera, polygons, colors)
+    renderRayTracing(ax2D, camera, polygons, colors)
     plt.show()
 
 if __name__ == '__main__':

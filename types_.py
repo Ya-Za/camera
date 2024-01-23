@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+# TODO: change list[float] to np.ndarray
 Point2D = list[float] # [float, float]
 Line2D = list[Point2D] # [Point2D, Point2D]
 Polygon2D = list[Point2D]
